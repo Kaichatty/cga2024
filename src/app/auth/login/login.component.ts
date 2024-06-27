@@ -1,15 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { AuthService, AuthRequest } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
+  loginData: AuthRequest = {
+    email: '',
+    password: ''
+  };
 
-  constructor() { }
+  constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit(): void {
+  login() {
+    this.authService.login(this.loginData).subscribe(
+      response => {
+        // handle successful login
+        // this.router.navigate(['/client-dashboard']);
+      },
+      error => {
+        // handle error
+        console.error(error);
+      }
+    );
   }
-
 }
