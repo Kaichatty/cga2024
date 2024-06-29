@@ -5,6 +5,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { ForgetPasswordComponent } from './auth/forget-password/forget-password.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 import { ActivateAccountComponent } from './auth/activate-account/activate-account.component'; // Nouvelle importation
+import { ClientDossierComponent } from './client-dossier/client-dossier.component';
 
 
 const routes: Routes = [
@@ -16,7 +17,10 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'forget-password', component: ForgetPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
-  { path: 'activate-account', component: ActivateAccountComponent } // Nouvelle route
+  { path: 'activate-account', component: ActivateAccountComponent },
+  { path: 'client-dossier/:id', component: ClientDossierComponent },
+
+
 
 ];
 

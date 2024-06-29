@@ -9,10 +9,16 @@ import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { ForgetPasswordComponent } from './auth/forget-password/forget-password.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
+import { ClientDossierComponent } from './client-dossier/client-dossier.component';
+import { DossierComponent } from './dossier/dossier.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ClientDossierComponent,
+    DossierComponent,
+    ClientDossierComponent
+
     
   ],
   imports: [
