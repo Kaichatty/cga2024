@@ -1,0 +1,42 @@
+<div>
+    <h2>Réserver une disponibilité</h2>
+  
+    <div>
+      <label for="adminSelect">Sélectionner un admin:</label>
+      <select id="adminSelect" [(ngModel)]="selectedAdminId" (change)="onAdminChange()">
+        <option *ngFor="let admin of admins" [value]="admin.id">{{ admin.name }}</option>
+      </select>
+    </div>
+  
+    <div *ngIf="selectedAdminId">
+      <h3>Disponibilités de l'Admin</h3>
+      <div *ngFor="let availability of availabilities">
+        <p>{{ availability.date }} - {{ availability.startTime }} à {{ availability.endTime }}</p>
+        <button (click)="selectedAvailabilityId = availability.id">Sélectionner cette disponibilité</button>
+      </div>
+  
+      <div *ngIf="selectedAvailabilityId">
+        <h3>Créer une réservation</h3>
+        <form (ngSubmit)="createReservation()">
+          <div>
+            <label for="clientId">Client ID:</label>
+            <input type="number" id="clientId" [(ngModel)]="clientId" name="clientId" required>
+          </div>
+          <div>
+            <label for="reservationTime">Heure de réservation:</label>
+            <input type="time" id="reservationTime" [(ngModel)]="reservationTime" name="reservationTime" required>
+          </div>
+          <button type="submit">Réserver</button>
+        </form>
+      </div>
+    </div>
+  
+    <div *ngIf="successMessage">
+      <p>{{ successMessage }}</p>
+    </div>
+  
+    <div *ngIf="errorMessage">
+      <p>{{ errorMessage }}</p>
+    </div>
+  </div>
+  

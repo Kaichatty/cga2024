@@ -13,4 +13,7 @@ export class ClientService {
   getDossier(clientId: number): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/${clientId}/dossier`);
   }
+  getAffairesByClientId(clientId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/${clientId}/affaires`);
+  }
 }

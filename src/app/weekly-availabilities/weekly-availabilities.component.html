@@ -1,0 +1,35 @@
+<div>
+    <h2>Créer une disponibilité</h2>
+  
+    <div>
+      <label for="adminId">ID de l'Admin:</label>
+      <input type="number" id="adminId" [(ngModel)]="adminId" name="adminId" required>
+    </div>
+  
+    <div>
+      <label for="startDate">Date :</label>
+      <input type="date" id="Date" [(ngModel)]="Date" name="Date" required>
+    </div>
+  
+    <div>
+      <label for="startTime">Heure de début:</label>
+      <input type="time" id="startTime" [(ngModel)]="startTime" name="startTime" required>
+    </div>
+  
+    <div>
+      <label for="endTime">Heure de fin:</label>
+      <input type="time" id="endTime" [(ngModel)]="endTime" name="endTime" required>
+    </div>
+  
+    <button (click)="createAvailability()">Créer Disponibilité</button>
+  
+    <div *ngIf="availabilities.length > 0">
+      <h3>Disponibilités créées:</h3>
+      <ul>
+        <li *ngFor="let availability of availabilities">
+          {{ availability.startDate | date }} - {{ availability.startTime }} à {{ availability.endTime }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  

@@ -1,0 +1,16 @@
+<div *ngIf="affaires.length > 0; else noAffaires">
+    <h2>Affaires for Client </h2>
+    <ul>
+      <li *ngFor="let affaire of affaires">
+        <h3>Affaire {{ affaire.id }}</h3>
+        <p>Numéro: {{ affaire.numeroAffaire }}</p>
+        <p>Nature: {{ affaire.natureAffaire }}</p>
+        <p>Date d'Audience: {{ affaire.dateAudience }}</p>
+        <p>Aboutissement: {{ affaire.aboutissement }}</p>
+      </li>
+    </ul>
+  </div>
+  <ng-template #noAffaires>
+    <p>No affaires found for Client {{ clientId }}.</p>
+  </ng-template>
+  

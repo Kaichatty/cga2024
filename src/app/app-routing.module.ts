@@ -6,6 +6,9 @@ import { ForgetPasswordComponent } from './auth/forget-password/forget-password.
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 import { ActivateAccountComponent } from './auth/activate-account/activate-account.component'; // Nouvelle importation
 import { ClientDossierComponent } from './client-dossier/client-dossier.component';
+import { ClientAffairesComponent } from './client-affaires/client-affaires.component';
+import { AdminAvailabilityComponent } from './admin-availability/admin-availability.component';
+import { WeeklyAvailabilitiesComponent } from './weekly-availabilities/weekly-availabilities.component';
 
 
 const routes: Routes = [
@@ -19,6 +22,12 @@ const routes: Routes = [
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'activate-account', component: ActivateAccountComponent },
   { path: 'client-dossier/:id', component: ClientDossierComponent },
+  { path: 'clients/:id/affaires', component: ClientAffairesComponent },
+  { path: 'admin-availability', component: AdminAvailabilityComponent },
+  { path: 'weekly-availabilities', component: WeeklyAvailabilitiesComponent},
+
+
+
 
 
 
