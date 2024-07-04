@@ -17,7 +17,10 @@ import { AdminAvailabilityComponent } from './admin-availability/admin-availabil
 import { AdminAvailabilityService } from './services/admin-availability.service';
 import { ReservationService } from './services/reservation.service';
 import { DatePipe } from '@angular/common';
-import { WeeklyAvailabilitiesComponent } from './weekly-availabilities/weekly-availabilities.component'; // Assurez-vous d'importer DatePipe
+import { WeeklyAvailabilitiesComponent } from './weekly-availabilities/weekly-availabilities.component';
+import { ChooseServiceComponent } from './choose-service/choose-service.component'; // Assurez-vous d'importer DatePipe
+import { ServiceService } from './services/service.service';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 
 @NgModule({
@@ -28,7 +31,9 @@ import { WeeklyAvailabilitiesComponent } from './weekly-availabilities/weekly-av
     ClientDossierComponent,
     ClientAffairesComponent,
     AdminAvailabilityComponent,
-    WeeklyAvailabilitiesComponent
+    WeeklyAvailabilitiesComponent,
+    ChooseServiceComponent,
+    NotificationsComponent
 
     
   ],
@@ -39,7 +44,7 @@ import { WeeklyAvailabilitiesComponent } from './weekly-availabilities/weekly-av
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [ClientService,AdminAvailabilityService, ReservationService, DatePipe],
+  providers: [ClientService,AdminAvailabilityService, ReservationService, DatePipe,ServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

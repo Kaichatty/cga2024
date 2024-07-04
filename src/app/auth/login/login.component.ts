@@ -12,6 +12,7 @@ export class LoginComponent {
     email: '',
     password: ''
   };
+  errorMessage: string;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -19,11 +20,13 @@ export class LoginComponent {
     this.authService.login(this.loginData).subscribe(
       response => {
         // handle successful login
-        // this.router.navigate(['/client-dashboard']);
+        this.authService.setCurrentUser(response); // Store user details in localStorage
+        this.router.navigate(['/choose-service']); // Redirect to choose-service page
       },
       error => {
         // handle error
-        console.error(error);
+        this.errorMessage = 'Login failed. Please check your credentials.';
+        console.error('Login error:', error);
       }
     );
   }

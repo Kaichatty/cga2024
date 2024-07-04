@@ -9,6 +9,7 @@ import { ClientDossierComponent } from './client-dossier/client-dossier.componen
 import { ClientAffairesComponent } from './client-affaires/client-affaires.component';
 import { AdminAvailabilityComponent } from './admin-availability/admin-availability.component';
 import { WeeklyAvailabilitiesComponent } from './weekly-availabilities/weekly-availabilities.component';
+import { ChooseServiceComponent } from './choose-service/choose-service.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,9 @@ const routes: Routes = [
   { path: 'clients/:id/affaires', component: ClientAffairesComponent },
   { path: 'admin-availability', component: AdminAvailabilityComponent },
   { path: 'weekly-availabilities', component: WeeklyAvailabilitiesComponent},
+  { path: 'choose-service', component: ChooseServiceComponent },
+
+
 
 
 

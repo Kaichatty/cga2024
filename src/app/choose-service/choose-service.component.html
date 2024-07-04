@@ -1,0 +1,17 @@
+<div class="container">
+    <h2>Choisissez un service</h2>
+    <form (ngSubmit)="chooseService()" #serviceForm="ngForm">
+      <div class="form-group">
+        <label for="selectedService">Sélectionnez un service :</label>
+        <select id="selectedService" name="selectedService" class="form-control" [(ngModel)]="selectedService" required>
+          <option value="" disabled selected>Choisir un service</option>
+          <option value="Prise de rendez-vous selon les créneaux libres">Prise de rendez-vous selon les créneaux libres</option>
+          <option value="Mission de conseil par téléphone">Mission de conseil par téléphone</option>
+          <option value="Mission de conseil par mail">Mission de conseil par mail</option>
+        </select>
+      </div>
+      
+      <button type="submit" class="btn btn-primary" [disabled]="!serviceForm.valid">Choisir ce service</button>
+    </form>
+  </div>
+  
