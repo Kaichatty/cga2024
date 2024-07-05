@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Client } from '@stomp/stompjs';
-import * as SockJS from 'sockjs-client';
+import { Client, IFrame, IMessage, StompSubscription } from '@stomp/stompjs';
+import SockJS from 'sockjs-client';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -13,20 +13,21 @@ export class WebSocketService {
   private client: Client;
 
   constructor() {
-    // Remplacez 'ws:' par 'http:' ou 'https:' en fonction du protocole de votre backend
     this.client = new Client({
-      webSocketFactory: () => new SockJS('http://localhost:8080/ws')  // Remplacez par 'https' si votre backend est servi sur HTTPS
+      webSocketFactory: () => new SockJS('http://localhost:8080/ws') // Adapt to 'https' if using HTTPS
     });
 
     this.client.onConnect = () => {
-      console.log('WebSocket connecté');
-      // Actions supplémentaires à effectuer lors de la connexion
+      console.log('WebSocket connected');
+    };
+
+    this.client.onStompError = (frame: IFrame) => {
+      console.error('WebSocket error:', frame);
     };
 
     this.client.activate();
   }
 
-  // Méthode pour envoyer une notification au backend
   sendNotification(message: string): void {
     this.client.publish({ destination: '/app/send/notification', body: message });
   }

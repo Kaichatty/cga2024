@@ -19,8 +19,9 @@ import { ReservationService } from './services/reservation.service';
 import { DatePipe } from '@angular/common';
 import { WeeklyAvailabilitiesComponent } from './weekly-availabilities/weekly-availabilities.component';
 import { ChooseServiceComponent } from './choose-service/choose-service.component'; // Assurez-vous d'importer DatePipe
+import { WebSocketService } from './services/web-socket-service.service';
 import { ServiceService } from './services/service.service';
-import { NotificationsComponent } from './notifications/notifications.component';
+import { AdminNotificationsComponent } from './admin-notifications/admin-notifications.component';
 
 
 @NgModule({
@@ -33,7 +34,9 @@ import { NotificationsComponent } from './notifications/notifications.component'
     AdminAvailabilityComponent,
     WeeklyAvailabilitiesComponent,
     ChooseServiceComponent,
-    NotificationsComponent
+    AdminNotificationsComponent,
+    AdminNotificationsComponent
+
 
     
   ],
@@ -44,7 +47,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [ClientService,AdminAvailabilityService, ReservationService, DatePipe,ServiceService],
+  providers: [ClientService,AdminAvailabilityService, ReservationService, DatePipe,ServiceService,WebSocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

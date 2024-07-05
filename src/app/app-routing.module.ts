@@ -10,6 +10,7 @@ import { ClientAffairesComponent } from './client-affaires/client-affaires.compo
 import { AdminAvailabilityComponent } from './admin-availability/admin-availability.component';
 import { WeeklyAvailabilitiesComponent } from './weekly-availabilities/weekly-availabilities.component';
 import { ChooseServiceComponent } from './choose-service/choose-service.component';
+import { AdminNotificationsComponent } from './admin-notifications/admin-notifications.component';
 
 
 const routes: Routes = [
@@ -26,7 +27,11 @@ const routes: Routes = [
   { path: 'clients/:id/affaires', component: ClientAffairesComponent },
   { path: 'admin-availability', component: AdminAvailabilityComponent },
   { path: 'weekly-availabilities', component: WeeklyAvailabilitiesComponent},
+  { path: 'admin-notifications', component: AdminNotificationsComponent },
+
   { path: 'choose-service', component: ChooseServiceComponent },
+  { path: 'notification', component: Notification },
+
 
 
 

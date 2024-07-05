@@ -18,13 +18,14 @@ export class LoginComponent {
 
   login() {
     this.authService.login(this.loginData).subscribe(
-      response => {
-        // handle successful login
-        this.authService.setCurrentUser(response); // Store user details in localStorage
-        this.router.navigate(['/choose-service']); // Redirect to choose-service page
+      user => {
+        // Stocker les informations utilisateur dans localStorage
+        this.authService.setCurrentUser(user);
+        // Rediriger vers la page de sélection de service
+        this.router.navigate(['/choose-service']);
       },
       error => {
-        // handle error
+        // Gérer les erreurs
         this.errorMessage = 'Login failed. Please check your credentials.';
         console.error('Login error:', error);
       }

@@ -1,17 +1,19 @@
-<div class="container">
-    <h2>Choisissez un service</h2>
-    <form (ngSubmit)="chooseService()" #serviceForm="ngForm">
-      <div class="form-group">
-        <label for="selectedService">Sélectionnez un service :</label>
-        <select id="selectedService" name="selectedService" class="form-control" [(ngModel)]="selectedService" required>
-          <option value="" disabled selected>Choisir un service</option>
-          <option value="Prise de rendez-vous selon les créneaux libres">Prise de rendez-vous selon les créneaux libres</option>
-          <option value="Mission de conseil par téléphone">Mission de conseil par téléphone</option>
-          <option value="Mission de conseil par mail">Mission de conseil par mail</option>
-        </select>
-      </div>
-      
-      <button type="submit" class="btn btn-primary" [disabled]="!serviceForm.valid">Choisir ce service</button>
-    </form>
+<div class="choose-service-container">
+  <h2>Choisissez un service</h2>
+  <div class="form-group">
+    <label for="service-select">Service:</label>
+    <select id="service-select" class="form-control" [(ngModel)]="selectedService">
+      <option value="rdv-direct">Prise de rendez-vous selon les créneaux libres</option>
+      <option value="conseil-mail">Mission de conseil par mail</option>
+      <option value="conseil-telephone">Mission de conseil par téléphone</option>
+    </select>
   </div>
-  
+  <button class="btn btn-primary mt-3" (click)="notifyAdmin(selectedService)" [disabled]="!selectedService">Confirmer</button>
+
+  <div *ngIf="currentUser" class="alert alert-success mt-3">
+    Notification envoyée à l'administrateur : {{ currentUser.username }} a choisi le service : {{ selectedService }}
+  </div>
+  <div *ngIf="notificationError" class="alert alert-danger mt-3">
+    Erreur lors de l'envoi de la notification : {{ notificationError }}
+  </div>
+</div>

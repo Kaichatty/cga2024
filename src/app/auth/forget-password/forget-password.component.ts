@@ -13,11 +13,11 @@ export class ForgetPasswordComponent {
 
   forgetPassword() {
     this.authService.forgetPassword(this.email).subscribe(
-      response => {
+      (response:any) => {
         // handle successful password reset request
         console.log('Password reset link sent to email');
       },
-      error => {
+      (error:any) => {
         // handle error
         console.error(error);
       }
