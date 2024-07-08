@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificationService } from '../services/notifications.service';
+import { Router } from '@angular/router';
+
+interface User {
+  username: string;
+}
 
 @Component({
   selector: 'app-choose-service',
@@ -8,15 +13,15 @@ import { NotificationService } from '../services/notifications.service';
   styleUrls: ['./choose-service.component.css']
 })
 export class ChooseServiceComponent {
-
-  notificationSent: boolean = false;
+  notificationSent = false;
   notificationError: string | undefined;
   selectedService: string | undefined;
-  currentUser: { username: string } | null = null;
+  currentUser: User | null = null;
 
   constructor(
     private authService: AuthService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private router: Router
   ) {
     this.currentUser = this.authService.getCurrentUserFromLocalStorage();
     console.log('Current User:', this.currentUser);
@@ -30,6 +35,11 @@ export class ChooseServiceComponent {
           console.log(`Notification envoyée à l'administrateur : ${message}`);
           this.notificationSent = true;
           this.selectedService = service; // Assigner la valeur sélectionnée
+          
+          // Rediriger si le service est "Prise de rendez-vous selon les créneaux libres"
+          if (service === 'rdv-direct') {
+            this.router.navigate(['/admin-availability']);
+          }
         },
         error => {
           console.error('Erreur lors de l\'envoi de la notification à l\'administrateur : ', error);

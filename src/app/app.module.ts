@@ -22,6 +22,7 @@ import { ChooseServiceComponent } from './choose-service/choose-service.componen
 import { WebSocketService } from './services/web-socket-service.service';
 import { ServiceService } from './services/service.service';
 import { AdminNotificationsComponent } from './admin-notifications/admin-notifications.component';
+import { AdminRdvComponent } from './admin-rdv/admin-rdv.component';
 
 
 @NgModule({
@@ -35,8 +36,10 @@ import { AdminNotificationsComponent } from './admin-notifications/admin-notific
     WeeklyAvailabilitiesComponent,
     ChooseServiceComponent,
     AdminNotificationsComponent,
-    AdminNotificationsComponent
+    AdminNotificationsComponent,
+    AdminRdvComponent
 
+    
 
     
   ],

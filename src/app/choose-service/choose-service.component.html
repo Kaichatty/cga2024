@@ -1,19 +1,18 @@
-<div class="choose-service-container">
-  <h2>Choisissez un service</h2>
-  <div class="form-group">
-    <label for="service-select">Service:</label>
-    <select id="service-select" class="form-control" [(ngModel)]="selectedService">
+<div>
+  <h2>Choisir un Service</h2>
+  <p *ngIf="currentUser">Utilisateur actuel : {{ currentUser.username }}</p>
+
+  <div>
+    <label for="service">Sélectionnez un service :</label>
+    <select id="service" [(ngModel)]="selectedService" name="service">
       <option value="rdv-direct">Prise de rendez-vous selon les créneaux libres</option>
-      <option value="conseil-mail">Mission de conseil par mail</option>
-      <option value="conseil-telephone">Mission de conseil par téléphone</option>
+      <option value="conseil-mail">Conseil par mail</option>
+      <option value="conseil-telephone">Conseil par téléphone</option>
     </select>
   </div>
-  <button class="btn btn-primary mt-3" (click)="notifyAdmin(selectedService)" [disabled]="!selectedService">Confirmer</button>
 
-  <div *ngIf="currentUser" class="alert alert-success mt-3">
-    Notification envoyée à l'administrateur : {{ currentUser.username }} a choisi le service : {{ selectedService }}
-  </div>
-  <div *ngIf="notificationError" class="alert alert-danger mt-3">
-    Erreur lors de l'envoi de la notification : {{ notificationError }}
-  </div>
+  <button class="btn btn-primary" (click)="notifyAdmin(selectedService)">Notifier l'administrateur</button>
+
+  <p *ngIf="notificationSent" class="text-success">Notification envoyée avec succès !</p>
+  <p *ngIf="notificationError" class="text-danger">Erreur lors de l'envoi de la notification : {{ notificationError }}</p>
 </div>

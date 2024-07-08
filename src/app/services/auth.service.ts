@@ -84,7 +84,6 @@ export class AuthService {
   activateAccount(token: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/activate-account?token=${token}`);
   }
-
   getCurrentUser(): User | null {
     return this.currentUser;
   }

@@ -1,0 +1,26 @@
+<div class="container mt-3">
+  <h2>Rendez-vous en attente</h2>
+  <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Description</th>
+        <th>Client</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let rdv of pendingRdvs">
+        <td>{{ rdv.dateRDV }}</td>
+        <td>{{ rdv.description }}</td>
+        <td>{{ rdv.client.name }}</td>
+        <td>
+          <button class="btn btn-success" (click)="acceptRdv(rdv.id)">Accepter</button>
+          <button class="btn btn-danger" (click)="rejectRdv(rdv.id)">Rejeter</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,3 +1,27 @@
-<div>
-    <p>Activating your account, please wait...</p>
+<div class="container">
+  <h1>Activer votre compte</h1>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
   </div>
+
+  <div *ngIf="successMessage" class="alert alert-success">
+    {{ successMessage }}
+  </div>
+
+  <form (ngSubmit)="activateAccount()">
+    <div class="form-group">
+      <label for="activationCode">Code d'activation :</label>
+      <input
+        type="text"
+        class="form-control"
+        id="activationCode"
+        [(ngModel)]="activationCode"
+        name="activationCode"
+        required
+      />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Activer mon compte</button>
+  </form>
+</div>

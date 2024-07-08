@@ -1,38 +1,55 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-activate-account',
-  templateUrl: './activate-account.component.html',
-  styleUrls: ['./activate-account.component.css']
+  template: `
+    <div class="container">
+      <h1>Activation de compte</h1>
+
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
+
+      <div *ngIf="successMessage" class="alert alert-success">
+        {{ successMessage }}
+      </div>
+
+      <p *ngIf="loading">Activation en cours...</p>
+    </div>
+  `
 })
-export class ActivateAccountComponent implements OnInit {
+export class ActivateAccountComponent {
+  errorMessage: string = '';
+  successMessage: string = '';
+  loading: boolean = true;
 
   constructor(
-    private route: ActivatedRoute,
     private authService: AuthService,
+    private route: ActivatedRoute,
     private router: Router
-  ) { }
-
-  ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      const token = params['token'];
-      if (token) {
-        this.authService.activateAccount(token).subscribe(
-          response => {
-            // handle successful activation
-            alert('Account activated successfully!');
-            this.router.navigate(['/login']);
-          },
-          error => {
-            // handle error
-            console.error(error);
-            alert('Account activation failed.');
-          }
-        );
-      }
-    });
+  ) {
+    this.activateAccount();
   }
 
+  activateAccount() {
+    const token = this.route.snapshot.queryParams['token'];
+  
+    this.authService.activateAccount(token)
+      .subscribe(
+        (response) => {
+          this.successMessage = 'Compte activé avec succès !';
+          this.errorMessage = '';
+          this.loading = false;
+          this.router.navigate(['/login']);
+        },
+        (error) => {
+          console.error(error);
+          this.errorMessage = 'Une erreur est survenue lors de l\'activation du compte.';
+          this.successMessage = '';
+          this.loading = false;
+        }
+      );
+    }
 }

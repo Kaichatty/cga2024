@@ -11,6 +11,7 @@ import { AdminAvailabilityComponent } from './admin-availability/admin-availabil
 import { WeeklyAvailabilitiesComponent } from './weekly-availabilities/weekly-availabilities.component';
 import { ChooseServiceComponent } from './choose-service/choose-service.component';
 import { AdminNotificationsComponent } from './admin-notifications/admin-notifications.component';
+import { AdminRdvComponent } from './admin-rdv/admin-rdv.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,8 @@ const routes: Routes = [
 
   { path: 'choose-service', component: ChooseServiceComponent },
   { path: 'notification', component: Notification },
+  { path: 'admin/rdvs', component: AdminRdvComponent },
+
 
 
 

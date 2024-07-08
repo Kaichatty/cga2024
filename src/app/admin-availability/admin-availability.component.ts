@@ -52,9 +52,12 @@ export class AdminAvailabilityComponent implements OnInit {
 
       this.reservationService.createReservation(this.clientId, this.selectedAvailabilityId, formattedReservationTime)
         .subscribe({
-          next: () => {
+          next: (reservation: any) => {
             this.successMessage = 'Réservation créée avec succès!';
             this.errorMessage = '';
+
+            // Rafraîchir la liste des disponibilités après création de la réservation
+            this.onAdminChange();
           },
           error: (error: any) => {
             console.error(error);
