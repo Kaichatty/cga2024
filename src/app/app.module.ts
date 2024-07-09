@@ -37,7 +37,7 @@ import { AdminRdvComponent } from './admin-rdv/admin-rdv.component';
     ChooseServiceComponent,
     AdminNotificationsComponent,
     AdminNotificationsComponent,
-    AdminRdvComponent
+    AdminRdvComponent,
 
     
 

@@ -1,55 +1,39 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-activate-account',
-  template: `
-    <div class="container">
-      <h1>Activation de compte</h1>
-
-      <div *ngIf="errorMessage" class="alert alert-danger">
-        {{ errorMessage }}
-      </div>
-
-      <div *ngIf="successMessage" class="alert alert-success">
-        {{ successMessage }}
-      </div>
-
-      <p *ngIf="loading">Activation en cours...</p>
-    </div>
-  `
+  templateUrl: './activate-account.component.html',
+  styleUrls: ['./activate-account.component.css']
 })
 export class ActivateAccountComponent {
+  activationCode: string = '';
   errorMessage: string = '';
   successMessage: string = '';
-  loading: boolean = true;
 
-  constructor(
-    private authService: AuthService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {
-    this.activateAccount();
+  constructor(private http: HttpClient, private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.activationCode = params['code'] || '';
+      if (this.activationCode) {
+        this.activateAccount();
+      }
+    });
   }
 
   activateAccount() {
-    const token = this.route.snapshot.queryParams['token'];
-  
-    this.authService.activateAccount(token)
+    this.http.get(`http://localhost:8080/api/v1/auth/activate-account?token=${this.activationCode}`)
       .subscribe(
-        (response) => {
+        (response: any) => {
           this.successMessage = 'Compte activé avec succès !';
           this.errorMessage = '';
-          this.loading = false;
-          this.router.navigate(['/login']);
         },
         (error) => {
-          console.error(error);
           this.errorMessage = 'Une erreur est survenue lors de l\'activation du compte.';
           this.successMessage = '';
-          this.loading = false;
         }
       );
-    }
+  }
 }

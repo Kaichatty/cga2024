@@ -1,23 +1,45 @@
 <div class="container">
-    <h2>Register</h2>
-    <form (ngSubmit)="register()">
-      <div class="form-group">
-        <label for="firstname">First Name</label>
-        <input type="text" id="firstname" [(ngModel)]="registerData.firstname" name="firstname" class="form-control" required>
-      </div>
-      <div class="form-group">
-        <label for="lastname">Last Name</label>
-        <input type="text" id="lastname" [(ngModel)]="registerData.lastname" name="lastname" class="form-control" required>
-      </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" [(ngModel)]="registerData.email" name="email" class="form-control" required>
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" [(ngModel)]="registerData.password" name="password" class="form-control" required>
-      </div>
-      <button type="submit" class="btn btn-primary">Register</button>
-    </form>
-  </div>
-  
+  <h1>Inscription</h1>
+
+  <!-- Formulaire pour l'inscription en tant que client -->
+  <form (ngSubmit)="registerClient()">
+    <div class="form-group">
+      <label for="firstname-client">Prénom</label>
+      <input type="text" class="form-control" id="firstname-client" [(ngModel)]="clientRegisterData.firstname" name="firstname-client" required>
+    </div>
+    <div class="form-group">
+      <label for="lastname-client">Nom</label>
+      <input type="text" class="form-control" id="lastname-client" [(ngModel)]="clientRegisterData.lastname" name="lastname-client" required>
+    </div>
+    <div class="form-group">
+      <label for="email-client">Email</label>
+      <input type="email" class="form-control" id="email-client" [(ngModel)]="clientRegisterData.email" name="email-client" required>
+    </div>
+    <div class="form-group">
+      <label for="password-client">Mot de passe</label>
+      <input type="password" class="form-control" id="password-client" [(ngModel)]="clientRegisterData.password" name="password-client" required>
+    </div>
+    <button type="submit" class="btn btn-primary">S'inscrire en tant que client</button>
+  </form>
+
+  <!-- Formulaire pour l'inscription en tant qu'administrateur -->
+  <form (ngSubmit)="registerAdmin()">
+    <div class="form-group">
+      <label for="firstname-admin">Prénom</label>
+      <input type="text" class="form-control" id="firstname-admin" [(ngModel)]="adminRegisterData.firstname" name="firstname-admin" required>
+    </div>
+    <div class="form-group">
+      <label for="lastname-admin">Nom</label>
+      <input type="text" class="form-control" id="lastname-admin" [(ngModel)]="adminRegisterData.lastname" name="lastname-admin" required>
+    </div>
+    <div class="form-group">
+      <label for="email-admin">Email</label>
+      <input type="email" class="form-control" id="email-admin" [(ngModel)]="adminRegisterData.email" name="email-admin" required>
+    </div>
+    <div class="form-group">
+      <label for="password-admin">Mot de passe</label>
+      <input type="password" class="form-control" id="password-admin" [(ngModel)]="adminRegisterData.password" name="password-admin" required>
+    </div>
+    <button type="submit" class="btn btn-primary">S'inscrire en tant qu'administrateur</button>
+  </form>
+</div>

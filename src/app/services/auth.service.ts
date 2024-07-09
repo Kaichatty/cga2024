@@ -3,12 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { RegisterResponse } from '../models/register-response.model';
 
 export interface RegisterRequest {
   firstname: string;
   lastname: string;
   email: string;
   password: string;
+  role: string; // Assurez-vous que 'role' est défini dans votre interface
+
 }
 
 export interface AuthRequest {
@@ -80,6 +83,8 @@ export class AuthService {
   resetPassword(token: string, request: ResetPasswordRequest): Observable<any> {
     return this.http.post(`${this.apiUrl}/reset-password?token=${token}`, request);
   }
+ 
+
 
   activateAccount(token: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/activate-account?token=${token}`);
@@ -94,5 +99,14 @@ export class AuthService {
 
   private removeUserFromLocalStorage(): void {
     localStorage.removeItem(this.currentUserKey);
+  }
+
+
+  registerClient(registerData: RegisterRequest): Observable<any> {
+    return this.http.post(`${this.apiUrl}/register/client`, registerData);
+  }
+
+  registerAdmin(registerData: RegisterRequest): Observable<any> {
+    return this.http.post(`${this.apiUrl}/register/admin`, registerData);
   }
 }

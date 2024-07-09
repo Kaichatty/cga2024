@@ -1,32 +1,57 @@
-import { Component } from '@angular/core';
-import { AuthService, RegisterRequest } from 'src/app/services/auth.service';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService, RegisterRequest } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent {
-  registerData: RegisterRequest = {
+export class RegisterComponent implements OnInit {
+  clientRegisterData: RegisterRequest = {
     firstname: '',
     lastname: '',
     email: '',
-    password: ''
+    password: '',
+    role: 'client'
   };
 
-  constructor(private authService: AuthService, private router: Router) {}
+  adminRegisterData: RegisterRequest = {
+    firstname: '',
+    lastname: '',
+    email: '',
+    password: '',
+    role: 'admin'
+  };
 
-  register() {
-    this.authService.register(this.registerData).subscribe(
-      response => {
-        // handle successful registration
-        this.router.navigate(['/login']);
-      },
-      error => {
-        // handle error
-        console.error(error);
-      }
-    );
+  constructor(private authService: AuthService, private router: Router) { }
+
+  ngOnInit() { }
+
+  registerClient() {
+    this.authService.registerClient(this.clientRegisterData)
+      .subscribe(
+        response => {
+          // Gérer la réponse de l'inscription en tant que client
+          this.router.navigate(['/login']);
+        },
+        error => {
+          // Gérer les erreurs de l'inscription en tant que client
+        }
+      );
+  }
+
+  registerAdmin() {
+    this.authService.registerAdmin(this.adminRegisterData)
+      .subscribe(
+        response => {
+          // Gérer la réponse de l'inscription en tant qu'administrateur
+          this.router.navigate(['/login']);
+
+        },
+        error => {
+          // Gérer les erreurs de l'inscription en tant qu'administrateur
+        }
+      );
   }
 }
