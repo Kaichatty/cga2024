@@ -9,7 +9,7 @@ import { AuthService, RegisterRequest } from 'src/app/services/auth.service';
 })
 export class RegisterComponent implements OnInit {
   clientRegisterData: RegisterRequest = {
-    firstname: '',
+    username: '',
     lastname: '',
     email: '',
     password: '',
@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
   };
 
   adminRegisterData: RegisterRequest = {
-    firstname: '',
+    username: '',
     lastname: '',
     email: '',
     password: '',

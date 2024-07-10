@@ -16,4 +16,7 @@ export class ClientService {
   getAffairesByClientId(clientId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/${clientId}/affaires`);
   }
+  getAllClients(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/getall`);
+  }
 }

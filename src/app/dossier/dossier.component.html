@@ -1,1 +1,18 @@
-<p>dossier works!</p>
+<div>
+    <h2>Créer un nouveau dossier</h2>
+    <form (ngSubmit)="createDossier()">
+      <label for="numeroDossier">Numéro de dossier:</label>
+      <input type="text" id="numeroDossier" name="numeroDossier" [(ngModel)]="dossier.numeroDossier" required>
+      
+      <!-- Sélection du client pour le dossier -->
+      <label for="client">Sélectionnez un client:</label>
+      <select id="client" name="client" [(ngModel)]="selectedClientId" required>
+        <option *ngFor="let client of clients" [value]="client.id">{{ client.id }} - {{ client.nom }} {{ client.prenom }}</option>
+      </select>
+  
+      <!-- Autres champs de formulaire pour les détails du dossier -->
+  
+      <button type="submit">Créer Dossier</button>
+    </form>
+  </div>
+  

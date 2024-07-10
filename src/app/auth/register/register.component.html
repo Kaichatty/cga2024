@@ -5,7 +5,7 @@
   <form (ngSubmit)="registerClient()">
     <div class="form-group">
       <label for="firstname-client">Prénom</label>
-      <input type="text" class="form-control" id="firstname-client" [(ngModel)]="clientRegisterData.firstname" name="firstname-client" required>
+      <input type="text" class="form-control" id="firstname-client" [(ngModel)]="clientRegisterData.username" name="firstname-client" required>
     </div>
     <div class="form-group">
       <label for="lastname-client">Nom</label>
@@ -26,7 +26,7 @@
   <form (ngSubmit)="registerAdmin()">
     <div class="form-group">
       <label for="firstname-admin">Prénom</label>
-      <input type="text" class="form-control" id="firstname-admin" [(ngModel)]="adminRegisterData.firstname" name="firstname-admin" required>
+      <input type="text" class="form-control" id="firstname-admin" [(ngModel)]="adminRegisterData.username" name="firstname-admin" required>
     </div>
     <div class="form-group">
       <label for="lastname-admin">Nom</label>

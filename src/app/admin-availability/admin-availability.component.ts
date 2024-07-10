@@ -3,6 +3,7 @@ import { DatePipe } from '@angular/common';
 import { ReservationService } from '../services/reservation.service';
 import { AdminAvailabilityService } from '../services/admin-availability.service';
 import { AdminService } from '../services/admin.service';
+import { AuthService } from '../services/auth.service'; // Importez le service AuthService
 
 @Component({
   selector: 'app-admin-availability',
@@ -25,6 +26,7 @@ export class AdminAvailabilityComponent implements OnInit {
     private reservationService: ReservationService,
     private adminAvailabilityService: AdminAvailabilityService,
     private adminService: AdminService,
+    private authService: AuthService, // Injectez le service AuthService
     private datePipe: DatePipe
   ) {}
 
@@ -33,6 +35,12 @@ export class AdminAvailabilityComponent implements OnInit {
       (data: any[]) => this.admins = data,
       (error: any) => console.error(error)
     );
+
+    // Récupérez l'ID du client à partir du service AuthService
+    const currentUser = this.authService.getCurrentUser();
+    if (currentUser) {
+      this.clientId = parseInt(currentUser.id, 10); // Assurez-vous que l'ID est un nombre
+    }
   }
 
   onAdminChange(): void {

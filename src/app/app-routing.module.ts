@@ -4,7 +4,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { ForgetPasswordComponent } from './auth/forget-password/forget-password.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
-import { ActivateAccountComponent } from './auth/activate-account/activate-account.component'; // Nouvelle importation
+import { ActivateAccountComponent } from './auth/activate-account/activate-account.component';
 import { ClientDossierComponent } from './client-dossier/client-dossier.component';
 import { ClientAffairesComponent } from './client-affaires/client-affaires.component';
 import { AdminAvailabilityComponent } from './admin-availability/admin-availability.component';
@@ -12,6 +12,10 @@ import { WeeklyAvailabilitiesComponent } from './weekly-availabilities/weekly-av
 import { ChooseServiceComponent } from './choose-service/choose-service.component';
 import { AdminNotificationsComponent } from './admin-notifications/admin-notifications.component';
 import { AdminRdvComponent } from './admin-rdv/admin-rdv.component';
+import { ClientGuard } from './auth/client.guard';
+import { DossierComponent } from './dossier/dossier.component';
+import { AffaireComponent } from './affaire/affaire.component';
+import { ListDossierComponent } from './list-dossier/list-dossier.component';
 
 
 const routes: Routes = [
@@ -27,20 +31,14 @@ const routes: Routes = [
   { path: 'client-dossier/:id', component: ClientDossierComponent },
   { path: 'clients/:id/affaires', component: ClientAffairesComponent },
   { path: 'admin-availability', component: AdminAvailabilityComponent },
-  { path: 'weekly-availabilities', component: WeeklyAvailabilitiesComponent},
+  { path: 'weekly-availabilities', component: WeeklyAvailabilitiesComponent },
   { path: 'admin-notifications', component: AdminNotificationsComponent },
-
-  { path: 'choose-service', component: ChooseServiceComponent },
-  { path: 'notification', component: Notification },
+  { path: 'choose-service', component: ChooseServiceComponent, canActivate: [ClientGuard] },
   { path: 'admin/rdvs', component: AdminRdvComponent },
+  { path: 'dossiers', component: DossierComponent },
+  { path: 'list-dossier', component: ListDossierComponent },
 
-
-
-
-
-
-
-
+  { path: 'dossier/:id/affaires', component: AffaireComponent }
 
 
 ];

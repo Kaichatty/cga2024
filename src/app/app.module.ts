@@ -23,6 +23,8 @@ import { WebSocketService } from './services/web-socket-service.service';
 import { ServiceService } from './services/service.service';
 import { AdminNotificationsComponent } from './admin-notifications/admin-notifications.component';
 import { AdminRdvComponent } from './admin-rdv/admin-rdv.component';
+import { AffaireComponent } from './affaire/affaire.component';
+import { ListDossierComponent } from './list-dossier/list-dossier.component';
 
 
 @NgModule({
@@ -38,6 +40,9 @@ import { AdminRdvComponent } from './admin-rdv/admin-rdv.component';
     AdminNotificationsComponent,
     AdminNotificationsComponent,
     AdminRdvComponent,
+    AffaireComponent,
+    ClientDossierComponent,
+    ListDossierComponent
 
     
 

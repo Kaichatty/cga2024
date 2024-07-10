@@ -3,15 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { RegisterResponse } from '../models/register-response.model';
+import { Router } from '@angular/router';
 
 export interface RegisterRequest {
-  firstname: string;
+  username: string;
   lastname: string;
   email: string;
   password: string;
   role: string; // Assurez-vous que 'role' est défini dans votre interface
-
 }
 
 export interface AuthRequest {
@@ -29,6 +28,7 @@ export interface User {
   username: string;
   lastname: string;
   token: string;
+  role: string;
 }
 
 @Injectable({
@@ -39,7 +39,7 @@ export class AuthService {
   private currentUser: User | null = null;
   private currentUserKey = 'currentUser';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.currentUser = this.getCurrentUserFromLocalStorage();
   }
 
@@ -54,7 +54,7 @@ export class AuthService {
 
   getCurrentUserFromLocalStorage(): User | null {
     const storedUser = localStorage.getItem(this.currentUserKey);
-    return storedUser ? JSON.parse(storedUser) : null;
+    return storedUser ? JSON.parse(storedUser) as User : null;
   }
 
   clearCurrentUser(): void {
@@ -72,7 +72,10 @@ export class AuthService {
 
   login(request: AuthRequest): Observable<User> {
     return this.http.post<User>(`${this.apiUrl}/authenticate`, request).pipe(
-      tap((user: User) => this.setCurrentUser(user))
+      tap((user: User) => {
+        this.setCurrentUser(user); // Définir l'utilisateur actuel après le login
+        this.redirectUser(); // Rediriger l'utilisateur après le login
+      })
     );
   }
 
@@ -83,12 +86,11 @@ export class AuthService {
   resetPassword(token: string, request: ResetPasswordRequest): Observable<any> {
     return this.http.post(`${this.apiUrl}/reset-password?token=${token}`, request);
   }
- 
-
 
   activateAccount(token: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/activate-account?token=${token}`);
   }
+
   getCurrentUser(): User | null {
     return this.currentUser;
   }
@@ -101,12 +103,25 @@ export class AuthService {
     localStorage.removeItem(this.currentUserKey);
   }
 
-
   registerClient(registerData: RegisterRequest): Observable<any> {
     return this.http.post(`${this.apiUrl}/register/client`, registerData);
   }
 
   registerAdmin(registerData: RegisterRequest): Observable<any> {
     return this.http.post(`${this.apiUrl}/register/admin`, registerData);
+  }
+
+  getCurrentUserRole(): string | null {
+    const user = this.getCurrentUser();
+    return user ? user.role : null;
+  }
+
+  redirectUser() {
+    const role = this.getCurrentUserRole();
+    if (role === 'CLIENT') {
+      this.router.navigate(['/choose-service']);
+    } else if (role === 'ADMIN') {
+      this.router.navigate(['']);  // Rediriger vers la page d'admin (à remplacer par le bon chemin)
+    }
   }
 }

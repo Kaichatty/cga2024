@@ -19,10 +19,9 @@ export class LoginComponent {
   login() {
     this.authService.login(this.loginData).subscribe(
       user => {
-        // Stocker les informations utilisateur dans localStorage
+        // Rediriger l'utilisateur en fonction du rôle après avoir défini l'utilisateur actuel
         this.authService.setCurrentUser(user);
-        // Rediriger vers la page de sélection de service
-        this.router.navigate(['/choose-service']);
+        this.authService.redirectUser(); // Utiliser le service pour rediriger
       },
       error => {
         // Gérer les erreurs
