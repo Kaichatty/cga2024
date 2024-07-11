@@ -1,76 +1,75 @@
 <div>
-    <h3>Affaires du Dossier {{ dossierId }}</h3>
-  
-    <div *ngIf="affaires.length > 0; else noAffaires">
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let affaire of affaires">
-          <div class="row">
-            <div class="col">{{ affaire.numeroAffaire }}</div>
-            <div class="col">{{ affaire.natureAffaire }}</div>
-            <div class="col">{{ affaire.dateAudience }}</div>
-            <div class="col">{{ affaire.aboutissement ? 'Aboutie' : 'Non aboutie' }}</div>
-            <div class="col">
-              <button class="btn btn-sm btn-primary" (click)="editAffaire(affaire)">Modifier</button>
-              <button class="btn btn-sm btn-danger" (click)="deleteAffaire(affaire.id)">Supprimer</button>
-              
-            </div>
+  <h3>Affaires du Dossier {{ dossierId }}</h3>
+
+  <div *ngIf="affaires.length > 0; else noAffaires">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let affaire of affaires">
+        <div class="row">
+          <div class="col">{{ affaire.numeroAffaire }}</div>
+          <div class="col">{{ affaire.natureAffaire }}</div>
+          <div class="col">{{ affaire.dateAudience }}</div>
+          <div class="col">{{ affaire.aboutissement ? 'Aboutie' : 'Non aboutie' }}</div>
+          <div class="col">
+            <button class="btn btn-sm btn-primary" [routerLink]="['/audiences/byAffaire', affaire.id]">Gérer Audiences</button>
+            <button class="btn btn-sm btn-primary" (click)="editAffaire(affaire)">Modifier</button>
+            <button class="btn btn-sm btn-danger" (click)="deleteAffaire(affaire.id)">Supprimer</button>
           </div>
-        </li>
-      </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <ng-template #noAffaires>
+    <p>Aucune affaire trouvée pour ce dossier.</p>
+  </ng-template>
+
+  <hr>
+
+  <h3>Ajouter une Affaire</h3>
+  <form (ngSubmit)="addAffaire()">
+    <div class="form-group">
+      <label for="numeroAffaire">Numéro d'Affaire</label>
+      <input type="text" class="form-control" id="numeroAffaire" [(ngModel)]="nouvelleAffaire.numeroAffaire" name="numeroAffaire" required>
     </div>
-  
-    <ng-template #noAffaires>
-      <p>Aucune affaire trouvée pour ce dossier.</p>
-    </ng-template>
-  
-    <hr>
-  
-    <h3>Ajouter une Affaire</h3>
-    <form (ngSubmit)="addAffaire()">
+    <div class="form-group">
+      <label for="natureAffaire">Nature d'Affaire</label>
+      <input type="text" class="form-control" id="natureAffaire" [(ngModel)]="nouvelleAffaire.natureAffaire" name="natureAffaire" required>
+    </div>
+    <div class="form-group">
+      <label for="dateAudience">Date d'Audience</label>
+      <input type="date" class="form-control" id="dateAudience" [(ngModel)]="nouvelleAffaire.dateAudience" name="dateAudience" required>
+    </div>
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" id="aboutissement" [(ngModel)]="nouvelleAffaire.aboutissement" name="aboutissement">
+      <label class="form-check-label" for="aboutissement">Aboutie</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+    <button type="button" class="btn btn-secondary" (click)="resetNouvelleAffaire()">Annuler</button>
+  </form>
+
+  <hr>
+
+  <div *ngIf="affaireToEdit">
+    <h3>Modifier Affaire</h3>
+    <form (ngSubmit)="updateAffaire()">
       <div class="form-group">
-        <label for="numeroAffaire">Numéro d'Affaire</label>
-        <input type="text" class="form-control" id="numeroAffaire" [(ngModel)]="nouvelleAffaire.numeroAffaire" name="numeroAffaire" required>
+        <label for="editNumeroAffaire">Numéro d'Affaire</label>
+        <input type="text" class="form-control" id="editNumeroAffaire" [(ngModel)]="affaireToEdit.numeroAffaire" name="editNumeroAffaire" required>
       </div>
       <div class="form-group">
-        <label for="natureAffaire">Nature d'Affaire</label>
-        <input type="text" class="form-control" id="natureAffaire" [(ngModel)]="nouvelleAffaire.natureAffaire" name="natureAffaire" required>
+        <label for="editNatureAffaire">Nature d'Affaire</label>
+        <input type="text" class="form-control" id="editNatureAffaire" [(ngModel)]="affaireToEdit.natureAffaire" name="editNatureAffaire" required>
       </div>
       <div class="form-group">
-        <label for="dateAudience">Date d'Audience</label>
-        <input type="date" class="form-control" id="dateAudience" [(ngModel)]="nouvelleAffaire.dateAudience" name="dateAudience" required>
+        <label for="editDateAudience">Date d'Audience</label>
+        <input type="date" class="form-control" id="editDateAudience" [(ngModel)]="affaireToEdit.dateAudience" name="editDateAudience" required>
       </div>
       <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="aboutissement" [(ngModel)]="nouvelleAffaire.aboutissement" name="aboutissement">
-        <label class="form-check-label" for="aboutissement">Aboutie</label>
+        <input type="checkbox" class="form-check-input" id="editAboutissement" [(ngModel)]="affaireToEdit.aboutissement" name="editAboutissement">
+        <label class="form-check-label" for="editAboutissement">Aboutie</label>
       </div>
       <button type="submit" class="btn btn-primary">Enregistrer</button>
-      <button type="button" class="btn btn-secondary" (click)="resetNouvelleAffaire()">Annuler</button>
+      <button type="button" class="btn btn-secondary" (click)="cancelEdit()">Annuler</button>
     </form>
-  
-    <hr>
-  
-    <div *ngIf="affaireToEdit">
-      <h3>Modifier Affaire</h3>
-      <form (ngSubmit)="updateAffaire()">
-        <div class="form-group">
-          <label for="editNumeroAffaire">Numéro d'Affaire</label>
-          <input type="text" class="form-control" id="editNumeroAffaire" [(ngModel)]="affaireToEdit.numeroAffaire" name="editNumeroAffaire" required>
-        </div>
-        <div class="form-group">
-          <label for="editNatureAffaire">Nature d'Affaire</label>
-          <input type="text" class="form-control" id="editNatureAffaire" [(ngModel)]="affaireToEdit.natureAffaire" name="editNatureAffaire" required>
-        </div>
-        <div class="form-group">
-          <label for="editDateAudience">Date d'Audience</label>
-          <input type="date" class="form-control" id="editDateAudience" [(ngModel)]="affaireToEdit.dateAudience" name="editDateAudience" required>
-        </div>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="editAboutissement" [(ngModel)]="affaireToEdit.aboutissement" name="editAboutissement">
-          <label class="form-check-label" for="editAboutissement">Aboutie</label>
-        </div>
-        <button type="submit" class="btn btn-primary">Enregistrer</button>
-        <button type="button" class="btn btn-secondary" (click)="cancelEdit()">Annuler</button>
-      </form>
-    </div>
   </div>
-  
+</div>

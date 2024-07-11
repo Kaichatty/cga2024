@@ -16,6 +16,8 @@ import { ClientGuard } from './auth/client.guard';
 import { DossierComponent } from './dossier/dossier.component';
 import { AffaireComponent } from './affaire/affaire.component';
 import { ListDossierComponent } from './list-dossier/list-dossier.component';
+import { AffaireAudiencesComponent } from './affaire-audiences/affaire-audiences.component';
+import { AudiencesByDayComponent } from './audiences-by-day/audiences-by-day.component';
 
 
 const routes: Routes = [
@@ -37,8 +39,13 @@ const routes: Routes = [
   { path: 'admin/rdvs', component: AdminRdvComponent },
   { path: 'dossiers', component: DossierComponent },
   { path: 'list-dossier', component: ListDossierComponent },
+    { path: 'list-dossier', component: ListDossierComponent },
 
-  { path: 'dossier/:id/affaires', component: AffaireComponent }
+
+  { path: 'dossier/:id/affaires', component: AffaireComponent },
+  { path: 'audiences/byAffaire/:affaireId', component: AffaireAudiencesComponent },
+  { path: 'audiences-by-day/:date', component: AudiencesByDayComponent },
+
 
 
 ];

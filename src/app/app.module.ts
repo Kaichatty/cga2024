@@ -25,6 +25,8 @@ import { AdminNotificationsComponent } from './admin-notifications/admin-notific
 import { AdminRdvComponent } from './admin-rdv/admin-rdv.component';
 import { AffaireComponent } from './affaire/affaire.component';
 import { ListDossierComponent } from './list-dossier/list-dossier.component';
+import { AffaireAudiencesComponent } from './affaire-audiences/affaire-audiences.component';
+import { AudiencesByDayComponent } from './audiences-by-day/audiences-by-day.component';
 
 
 @NgModule({
@@ -42,7 +44,9 @@ import { ListDossierComponent } from './list-dossier/list-dossier.component';
     AdminRdvComponent,
     AffaireComponent,
     ClientDossierComponent,
-    ListDossierComponent
+    ListDossierComponent,
+    AffaireAudiencesComponent,
+    AudiencesByDayComponent,
 
     
 

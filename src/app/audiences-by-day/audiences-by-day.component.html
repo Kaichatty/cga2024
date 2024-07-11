@@ -1,0 +1,12 @@
+<div class="container">
+    <h2>Audiences pour le {{ selectedDate }}</h2>
+  
+    <!-- Liste des Audiences -->
+    <ul class="list-group">
+      <li *ngFor="let audience of audiences" class="list-group-item">
+        {{ audience.dateAudience | date: 'dd/MM/yyyy' }} - {{ audience.description }}
+      </li>
+      <li *ngIf="audiences.length === 0" class="list-group-item">Aucune audience pour cette date.</li>
+    </ul>
+  </div>
+  

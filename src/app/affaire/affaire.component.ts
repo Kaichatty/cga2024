@@ -60,7 +60,7 @@ export class AffaireComponent implements OnInit {
   }
 
   editAffaire(affaire: any): void {
-    this.affaireToEdit = { ...affaire }; // Clone the affaire object
+    this.affaireToEdit = { ...affaire };
   }
 
   cancelEdit(): void {
